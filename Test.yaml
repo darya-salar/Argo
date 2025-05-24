@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-webhook
+  labels:
+    app: nginx
+  namespace: Kod
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+    - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  namespace: Kod
+spec:
+  ports:
+  - name: http-nginx
+    protocol: TCP
+    port: 80
+    targetPort: 80
+  nodeSelector:
+    app: nginx
+  Type: LoadBalancer:wq
